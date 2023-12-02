@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Stop_Watch</title>
+    <style>
+        #main {
+            height: 300px;
+            width: 300px;
+            margin: 100px 600px;
+            background-color: aqua;
+            border: 3px solid;
+            text-align: center;
+            border-radius: 10px;
+        }
+        #dis {
+            background-color: white;
+            height: 50px;
+            width: 250px;
+            margin: 10px 24px;
+            border-radius: 10px;
+            border: 2px solid;
+            color: black;
+        }
+        #display{
+            font-size: 30px;
+        }
+        .btt{
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        var timer;
+        var hr = 0;
+        var min = 0;
+        var sec = 0;
+        var milisec = 0;
+        var dishr = 0;
+        var dismin = 0;
+        var dissec = 0;
+        var dismilisec = 0;
+
+        function start() {
+            clearInterval(timer)
+            timer = setInterval(run,10);
+        }
+        function run() {
+            milisec++;
+
+            if (milisec == 100) {
+                milisec = 0;
+                sec++;
+            }
+            if (sec == 60) {
+                sec = 0;
+                min++;
+            }
+            if (min == 60) {
+                min = 0;
+                hr++;
+            }
+            dishr = (hr < 10) ? "0" + hr : hr;
+            dismin = (min < 10) ? "0" + min : min;
+            dissec = (sec < 10) ? "0" + sec : sec;
+            dismilisec = (milisec < 10) ? "0" + milisec : milisec;
+            document.getElementById("display").innerHTML = dishr + ":" + dismin + ":" + dissec + ":" + dismilisec;
+        }
+        function stop() {
+            clearInterval(timer);
+        }
+        function reset() {
+            clearInterval(timer);
+            hr = 0;
+            min = 0;
+            sec = 0;
+            milisec = 0;
+            document.getElementById("display").innerHTML = "00:00:00:00";
+        }       
+    </script>
+</head>
+
+<body>
+    <div id="main">
+        <h1>Stop_Watch</h1>
+        <h3>make by bikendra singh</h3>
+        <div class="container">
+            <div id="dis">
+                <span id="display">00:00:00:00</span>
+            </div>
+            <div id="btn">
+                <button type="button" class="btt" onclick="start()">Start</button>
+                <button type="button" class="btt" onclick="stop()">Stop</button>
+                <button type="button" class="btt" onclick="reset()">Reset</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
